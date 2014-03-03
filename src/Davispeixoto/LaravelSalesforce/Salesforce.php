@@ -17,9 +17,9 @@ class Salesforce {
 		}
 	}
 	
-	public function create()
+	public static function create()
 	{
-		//
+		//$this->connection->create();
 	}
 	
 	public function update()
