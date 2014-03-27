@@ -3,17 +3,23 @@
 use Davispeixoto\ForceDotComToolkitForPhp\SforceEnterpriseClient as Client;
 
 class Salesforce {
-	protected $sfh;
+	protected static $sfh;
 	
-	public function __construct($username , $password , $token)
+	/**
+	 * Force.com Toolkit Instance
+	 * @throws Exception
+	 */
+	private static function getClient()
 	{
-		try {
-			$this->sfh = new Client();
-			$this->sfh->createConnection(__DIR__.'/Wsdl/enterprise.wsdl.xml');
-			$this->sfh->login($username, $password.$token);
-		} catch (Exception $e) {
-			Log::error($e->getMessage());
-			throw $e;
+		if (empty(self::$sfh)) {
+			try {
+				self::$sfh = new Client();
+				self::$sfh->createConnection(__DIR__.'/Wsdl/enterprise.wsdl.xml');
+				self::$sfh->login(Config::get('salesforce:username') , Config::get('salesforce:password') . Config::get('salesforce:token'));
+			} catch (Exception $e) {
+				Log::error($e->getMessage());
+				throw $e;
+			}
 		}
 	}
 	
@@ -22,22 +28,26 @@ class Salesforce {
 	 */
 	public static function create($sObjects, $type)
 	{
-		return $this->sfh->create($sObjects, $type);
+		self::getClient();
+		return self::$sfh->create($sObjects, $type);
 	}
 	
 	public static function update($sObjects, $type, $assignment_header = NULL, $mru_header = NULL)
 	{
-		return $this->sfh->update($sObjects, $type, $assignment_header, $mru_header);
+		self::getClient();
+		return self::$sfh->update($sObjects, $type, $assignment_header, $mru_header);
 	}
 	
 	public static function upsert($ext_Id, $sObjects, $type = 'Contact')
 	{
-		return $this->sfh->upsert($ext_Id, $sObjects, $type);
+		self::getClient();
+		return self::$sfh->upsert($ext_Id, $sObjects, $type);
 	}
 	
 	public function merge($mergeRequest, $type)
 	{
-		return $this->sfh->merge($mergeRequest, $type);
+		self::getClient();
+		return self::$sfh->merge($mergeRequest, $type);
 	}
 	
 	/*
@@ -45,267 +55,320 @@ class Salesforce {
 	 */
 	public static function getNamespace()
 	{
-		return $this->sfh->getNamespace();
+		self::getClient();
+		return self::$sfh->getNamespace();
 	}
 	
 	public static function printDebugInfo()
 	{
-		return $this->sfh->printDebugInfo();
+		self::getClient();
+		return self::$sfh->printDebugInfo();
 	}
 	
 	public static function createConnection($wsdl, $proxy = NULL, $soap_options = array())
 	{
-		return $this->sfh->createConnection($wsdl, $proxy, $soap_options);
+		self::getClient();
+		return self::$sfh->createConnection($wsdl, $proxy, $soap_options);
 	}
 	
 	public static function setCallOptions($header)
 	{
-		return $this->sfh->setCallOptions($header);
+		self::getClient();
+		return self::$sfh->setCallOptions($header);
 	}
 	
 	public static function login($username, $password)
 	{
-		return $this->sfh->login($username, $password);
+		self::getClient();
+		return self::$sfh->login($username, $password);
 	}
 	
 	public static function logout()
 	{
-		return $this->sfh->logout();
+		self::getClient();
+		return self::$sfh->logout();
 	}
 	
 	public static function invalidateSessions()
 	{
-		return $this->sfh->invalidateSessions();
+		self::getClient();
+		return self::$sfh->invalidateSessions();
 	}
 	
 	public static function setEndpoint($location)
 	{
-		return $this->sfh->setEndpoint($location);
+		self::getClient();
+		return self::$sfh->setEndpoint($location);
 	}
 	
 	public static function setAssignmentRuleHeader($header)
 	{
-		return $this->sfh->setAssignmentRuleHeader($header);
+		self::getClient();
+		return self::$sfh->setAssignmentRuleHeader($header);
 	}
 	
 	public static function setEmailHeader($header)
 	{
-		return $this->sfh->setEmailHeader($header);
+		self::getClient();
+		return self::$sfh->setEmailHeader($header);
 	}
 	
 	public static function setLoginScopeHeader($header)
 	{
-		return $this->sfh->setLoginScopeHeader($header);
+		self::getClient();
+		return self::$sfh->setLoginScopeHeader($header);
 	}
 	
 	public static function setMruHeader($header)
 	{
-		return $this->sfh->setMruHeader($header);
+		self::getClient();
+		return self::$sfh->setMruHeader($header);
 	}
 	
 	public static function setSessionHeader($id)
 	{
-		return $this->sfh->setSessionHeader($id);
+		self::getClient();
+		return self::$sfh->setSessionHeader($id);
 	}
 	
 	public static function setUserTerritoryDeleteHeader($header)
 	{
-		return $this->sfh->setUserTerritoryDeleteHeader($header);
+		self::getClient();
+		return self::$sfh->setUserTerritoryDeleteHeader($header);
 	}
 	
 	public static function setQueryOptions($header)
 	{
-		return $this->sfh->setQueryOptions($header);
+		self::getClient();
+		return self::$sfh->setQueryOptions($header);
 	}
 	
 	public static function setAllowFieldTruncationHeader($header)
 	{
-		return $this->sfh->setAllowFieldTruncationHeader($header);
+		self::getClient();
+		return self::$sfh->setAllowFieldTruncationHeader($header);
 	}
 	
 	public static function setLocaleOptions($header)
 	{
-		return $this->sfh->setLocaleOptions($header);
+		self::getClient();
+		return self::$sfh->setLocaleOptions($header);
 	}
 	
 	public static function setPackageVersionHeader($header)
 	{
-		return $this->sfh->setPackageVersionHeader($header);
+		self::getClient();
+		return self::$sfh->setPackageVersionHeader($header);
 	}
 	
 	public static function getSessionId()
 	{
-		return $this->sfh->getSessionId();
+		self::getClient();
+		return self::$sfh->getSessionId();
 	}
 	
 	public static function getLocation()
 	{
-		return $this->sfh->getLocation();
+		self::getClient();
+		return self::$sfh->getLocation();
 	}
 	
 	public static function getConnection()
 	{
-		return $this->sfh->getConnection();
+		self::getClient();
+		return self::$sfh->getConnection();
 	}
 	
 	public static function getFunctions()
 	{
-		return $this->sfh->getFunctions();
+		self::getClient();
+		return self::$sfh->getFunctions();
 	}
 	
 	public static function getTypes()
 	{
-		return $this->sfh->getTypes();
+		self::getClient();
+		return self::$sfh->getTypes();
 	}
 	
 	public static function getLastRequest()
 	{
-		return $this->sfh->getLastRequest();
+		self::getClient();
+		return self::$sfh->getLastRequest();
 	}
 	
 	public static function getLastRequestHeaders()
 	{
-		return $this->sfh->getLastRequestHeaders();
+		self::getClient();
+		return self::$sfh->getLastRequestHeaders();
 	}
 	
 	public static function getLastResponse()
 	{
-		return $this->sfh->getLastResponse();
+		self::getClient();
+		return self::$sfh->getLastResponse();
 	}
 	
 	public static function getLastResponseHeaders()
 	{
-		return $this->sfh->getLastResponseHeaders();
+		self::getClient();
+		return self::$sfh->getLastResponseHeaders();
 	}
 	
 	public static function sendSingleEmail($request)
 	{
-		return $this->sfh->sendSingleEmail($request);
+		self::getClient();
+		return self::$sfh->sendSingleEmail($request);
 	}
 	
 	public static function sendMassEmail($request)
 	{
-		return $this->sfh->sendMassEmail($request);
+		self::getClient();
+		return self::$sfh->sendMassEmail($request);
 	}
 	
 	public static function convertLead($leadConverts)
 	{
-		return $this->sfh->convertLead($leadConverts);
+		self::getClient();
+		return self::$sfh->convertLead($leadConverts);
 	}
 	
 	public static function delete($ids)
 	{
-		return $this->sfh->delete($ids);
+		self::getClient();
+		return self::$sfh->delete($ids);
 	}
 	
 	public static function undelete($ids)
 	{
-		return $this->sfh->undelete($ids);
+		self::getClient();
+		return self::$sfh->undelete($ids);
 	}
 	
 	public static function emptyRecycleBin($ids)
 	{
-		return $this->sfh->emptyRecycleBin($ids);
+		self::getClient();
+		return self::$sfh->emptyRecycleBin($ids);
 	}
 	
 	public static function processSubmitRequest($processRequestArray)
 	{
-		return $this->sfh->processSubmitRequest($processRequestArray);
+		self::getClient();
+		return self::$sfh->processSubmitRequest($processRequestArray);
 	}
 	
 	public static function processWorkitemRequest($processRequestArray)
 	{
-		return $this->sfh->processWorkitemRequest($processRequestArray);
+		self::getClient();
+		return self::$sfh->processWorkitemRequest($processRequestArray);
 	}
 	
 	public static function describeGlobal()
 	{
-		return $this->sfh->describeGlobal();
+		self::getClient();
+		return self::$sfh->describeGlobal();
 	}
 	
 	public static function describeLayout($type, array $recordTypeIds = NULL)
 	{
-		return $this->sfh->describeLayout($type, $recordTypeIds);
+		self::getClient();
+		return self::$sfh->describeLayout($type, $recordTypeIds);
 	}
 	
 	public static function describeSObject($type)
 	{
-		return $this->sfh->describeSObject($type);
+		self::getClient();
+		return self::$sfh->describeSObject($type);
 	}
 	
 	public static function describeSObjects($arrayOfTypes)
 	{
-		return $this->sfh->describeSObjects($arrayOfTypes);
+		self::getClient();
+		return self::$sfh->describeSObjects($arrayOfTypes);
 	}
 	
 	public static function describeTabs()
 	{
-		return $this->sfh->describeTabs();
+		self::getClient();
+		return self::$sfh->describeTabs();
 	}
 	
 	public static function describeDataCategoryGroups($sObjectType)
 	{
-		return $this->sfh->describeDataCategoryGroups($sObjectType);
+		self::getClient();
+		return self::$sfh->describeDataCategoryGroups($sObjectType);
 	}
 	
 	public static function describeDataCategoryGroupStructures(array $pairs, $topCategoriesOnly)
 	{
-		return $this->sfh->describeDataCategoryGroupStructures($pairs, $topCategoriesOnly);
+		self::getClient();
+		return self::$sfh->describeDataCategoryGroupStructures($pairs, $topCategoriesOnly);
 	}
 	
 	public static function getDeleted($type, $startDate, $endDate)
 	{
-		return $this->sfh->getDeleted($type, $startDate, $endDate);
+		self::getClient();
+		return self::$sfh->getDeleted($type, $startDate, $endDate);
 	}
 	
 	public static function getUpdated($type, $startDate, $endDate)
 	{
-		return $this->sfh->getUpdated($type, $startDate, $endDate);
+		self::getClient();
+		return self::$sfh->getUpdated($type, $startDate, $endDate);
 	}
 	
 	public static function query($query)
 	{
-		return $this->sfh->query($query);
+		self::getClient();
+		return self::$sfh->query($query);
 	}
 	
 	public static function queryMore($queryLocator)
 	{
-		return $this->sfh->queryMore($queryLocator);
+		self::getClient();
+		return self::$sfh->queryMore($queryLocator);
 	}
 	
 	public static function queryAll($query, $queryOptions = NULL)
 	{
-		return $this->sfh->queryAll($query, $queryOptions);
+		self::getClient();
+		return self::$sfh->queryAll($query, $queryOptions);
 	}
 	
 	public static function retrieve($fieldList, $sObjectType, $ids)
 	{
-		return $this->sfh->retrieve($fieldList, $sObjectType, $ids);
+		self::getClient();
+		return self::$sfh->retrieve($fieldList, $sObjectType, $ids);
 	}
 	
 	public static function search($searchString)
 	{
-		return $this->sfh->search($searchString);
+		self::getClient();
+		return self::$sfh->search($searchString);
 	}
 	
 	public static function getServerTimestamp()
 	{
-		return $this->sfh->getServerTimestamp();
+		self::getClient();
+		return self::$sfh->getServerTimestamp();
 	}
 	
 	public static function getUserInfo()
 	{
-		return $this->sfh->getUserInfo();
+		self::getClient();
+		return self::$sfh->getUserInfo();
 	}
 	
 	public static function setPassword($userId, $password)
 	{
-		return $this->sfh->setPassword($userId, $password);
+		self::getClient();
+		return self::$sfh->setPassword($userId, $password);
 	}
 	
 	public static function resetPassword($userId)
 	{
-		return $this->sfh->resetPassword($userId);
+		self::getClient();
+		return self::$sfh->resetPassword($userId);
 	}
 }
 ?>

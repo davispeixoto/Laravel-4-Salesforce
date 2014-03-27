@@ -29,7 +29,7 @@ class LaravelSalesforceServiceProvider extends ServiceProvider {
 	public function register()
 	{
 		$this->app['salesforce'] = $this->app->share(function($app) {
-			return new Salesforce(Config::get('salesforce:username') , Config::get('salesforce:password') , Config::get('salesforce:token'));
+			return new Salesforce;
 		});
 		
 		$this->app->booting(function() {
