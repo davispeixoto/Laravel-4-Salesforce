@@ -1,9 +1,16 @@
 <?php namespace Davispeixoto\LaravelSalesforce;
 
 use Davispeixoto\ForceDotComToolkitForPhp\SforceEnterpriseClient as Client;
+use Illuminate\Config\Repository;
 
 class Salesforce {
 	protected static $sfh;
+	protected static $config;
+	
+	public function __construct(Repository $configExternal)
+	{
+		self::$config = $configExternal;
+	}
 	
 	/**
 	 * Force.com Toolkit Instance
@@ -15,7 +22,7 @@ class Salesforce {
 			try {
 				self::$sfh = new Client();
 				self::$sfh->createConnection(__DIR__.'/Wsdl/enterprise.wsdl.xml');
-				self::$sfh->login(Config::get('salesforce:username') , Config::get('salesforce:password') . Config::get('salesforce:token'));
+				self::$sfh->login(self::$config->get('salesforce::username') , self::$config->get('salesforce::password') . self::$config->get('salesforce::token'));
 			} catch (Exception $e) {
 				Log::error($e->getMessage());
 				throw $e;
