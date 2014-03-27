@@ -29,7 +29,9 @@ class LaravelSalesforceServiceProvider extends ServiceProvider {
 	public function register()
 	{
 		$this->app['salesforce'] = $this->app->share(function($app) {
-			return new Salesforce($app['config']);
+			$sales = Salesforce::factory($app['config']['salesforce']);
+			
+			return $sales;
 		});
 		
 		$this->app->booting(function() {

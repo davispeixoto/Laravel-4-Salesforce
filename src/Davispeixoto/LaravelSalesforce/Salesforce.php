@@ -5,29 +5,24 @@ use Illuminate\Config\Repository;
 
 class Salesforce {
 	protected static $sfh;
-	protected static $config;
+	protected static $instance;
 	
-	public function __construct(Repository $configExternal)
+	public static function factory(Repository $configExternal)
 	{
-		self::$config = $configExternal;
-	}
-	
-	/**
-	 * Force.com Toolkit Instance
-	 * @throws Exception
-	 */
-	private static function getClient()
-	{
-		if (empty(self::$sfh)) {
+		if (empty(self::$sfh) || empty($self::$instance)) {
+			$c = __CLASS__;
+			self::$instance = new $c;
 			try {
 				self::$sfh = new Client();
 				self::$sfh->createConnection(__DIR__.'/Wsdl/enterprise.wsdl.xml');
-				self::$sfh->login(self::$config->get('salesforce::username') , self::$config->get('salesforce::password') . self::$config->get('salesforce::token'));
+				self::$sfh->login($configExternal->get('username') , $configExternal->get('password') . $configExternal->get('token'));
 			} catch (Exception $e) {
 				Log::error($e->getMessage());
 				throw $e;
 			}
 		}
+		
+		return self::$instance;
 	}
 	
 	/*
