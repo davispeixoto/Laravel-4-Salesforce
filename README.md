@@ -10,9 +10,8 @@ Begin by installing this package through Composer. Edit your project's `composer
 
 	"require": {
 		"laravel/framework": "4.1.*",
-		"davispeixoto/laravel-salesforce": "dev-master"
-	},
-	"minimum-stability" : "dev"
+		"davispeixoto/laravel-salesforce": "1.0.*"
+	}
 
 Next, update Composer from the Terminal:
 
@@ -31,7 +30,12 @@ Finally add the service provider. Open `app/config/app.php`, and add a new item 
 That's it! You're all set to go. Just use:
 
     Route::get('/test', function() {
-    	echo print_r(Salesforce::create('Contact' , $object);
+	try {
+	    	echo print_r(Salesforce::describeLayout('Account');
+	} catch (Exception $e) {
+		Log::error($e->getMessage());
+		die($e->getMessage() . $e->getTraceAsString());
+	}
     });
 
 ### License
