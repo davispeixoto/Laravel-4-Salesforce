@@ -19,7 +19,7 @@ class Salesforce {
 				return self::$instance;
 			} catch (Exception $e) {
 				Log::error($e->getMessage());
-				throw $e;
+				throw new Exception('Exception no Construtor' . $e->getMessage() . "\n\n" . $e->getTraceAsString());
 			}
 		}
 	}
@@ -232,7 +232,15 @@ class Salesforce {
 	
 	public static function describeLayout($type, array $recordTypeIds = NULL)
 	{
-		return self::$instance->sfh->describeLayout($type, $recordTypeIds);
+		// tentativa 1
+		//return self::$instance->sfh->describeLayout($type, $recordTypeIds);
+		
+		//tentativa 2
+		return $this->sfh->describeLayout($type, $recordTypeIds);
+		
+		//tentativa 3
+		//$i = self::$instance;
+		//return $i->sfh->describeLayout($type, $recordTypeIds);
 	}
 	
 	public static function describeSObject($type)
@@ -321,7 +329,7 @@ class Salesforce {
 	public static function dump()
 	{
 		$str = print_r(self::$instance , true);
-		$str .= print_r(self::$instance->sfh , true);
+		//$str .= print_r(self::$instance->sfh , true);
 	}
 }
 ?>
