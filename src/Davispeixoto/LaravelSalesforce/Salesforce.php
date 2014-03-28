@@ -314,5 +314,14 @@ class Salesforce {
 	{
 		return self::$instance->sfh->resetPassword($userId);
 	}
+	
+	/*
+	 * Debugging functions
+	 */
+	public static function dump()
+	{
+		$str = print_r(self::$instance , true);
+		$str .= print_r(self::$instance->sfh , true);
+	}
 }
 ?>
