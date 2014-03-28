@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 
-class Salesforce extends Facades {
+class Salesforce extends Facade {
 	/**
 	 * Get the registered name of the component.
 	 *

@@ -28,16 +28,14 @@ class LaravelSalesforceServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app['salesforce'] = $this->app->share(function($app) {
-			$sales = Salesforce::factory($app['config']['salesforce']);
-			
-			return $sales;
-		});
-		
 		$this->app->booting(function() {
 			$loader = \Illuminate\Foundation\AliasLoader::getInstance();
 			$loader->alias('Salesforce', 'Davispeixoto\LaravelSalesforce\Facades\Salesforce');
 			$loader->alias('SF', 'Davispeixoto\LaravelSalesforce\Facades\Salesforce');
+		});
+		
+		$this->app['salesforce'] = $this->app->share(function($app) {
+			return new Salesforce($app['config']);
 		});
 	}
 
@@ -52,3 +50,4 @@ class LaravelSalesforceServiceProvider extends ServiceProvider {
 	}
 
 }
+?>
