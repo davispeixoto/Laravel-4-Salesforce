@@ -31,7 +31,7 @@ That's it! You're all set to go. Just use:
 
     Route::get('/test', function() {
 	try {
-	    	echo print_r(Salesforce::describeLayout('Account');
+	    	echo print_r(Salesforce::describeLayout('Account'));
 	} catch (Exception $e) {
 		Log::error($e->getMessage());
 		die($e->getMessage() . $e->getTraceAsString());
