@@ -9,6 +9,6 @@ class Salesforce extends Facade {
 	 * @return string
 	 */
 	protected static function getFacadeAccessor() {
-		return 'laravel-salesforce';
+		return 'salesforce';
 	}
 }
