@@ -8,13 +8,17 @@ return array(
     |
     |
     */
+
+    // production
     'username'    => '',
 	'password' => '',
 	'token' => '',
-    'wsdl' => 'enterprise.wsdl.xml',
+    'endpoint' => '',
 
+
+//    sandbox
 //    'username'    => '',
 //    'password' => '',
 //    'token' => '',
-//    'wsdl' => 'enterprise.sandbox.wsdl.xml',
+//    'endpoint' => 'https://xxx.salesforce.com/services/Soap/c/27.0',
 );
