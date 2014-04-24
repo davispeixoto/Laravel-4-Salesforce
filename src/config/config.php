@@ -13,12 +13,12 @@ return array(
     'username'    => '',
 	'password' => '',
 	'token' => '',
-    'endpoint' => '',
+    'endpoint' => null,
 
 
 //    sandbox
 //    'username'    => '',
 //    'password' => '',
 //    'token' => '',
-//    'endpoint' => 'https://xxx.salesforce.com/services/Soap/c/27.0',
+//    'endpoint' => 'https://test.salesforce.com/services/Soap/c/27.0',
 );

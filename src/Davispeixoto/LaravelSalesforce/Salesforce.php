@@ -11,11 +11,13 @@ class Salesforce {
 		try {
 			$this->sfh = new Client();
 			$this->sfh->createConnection(__DIR__.'/Wsdl/enterprise.wsdl.xml');
-			$this->sfh->login($configExternal->get('laravel-salesforce::username') , $configExternal->get('laravel-salesforce::password') . $configExternal->get('laravel-salesforce::token'));
+
             $endpoint = $configExternal->get('laravel-salesforce::endpoint');
             if (!empty($endpoint)) {
                 $this->sfh->setEndpoint($endpoint);
             }
+
+			$this->sfh->login($configExternal->get('laravel-salesforce::username') , $configExternal->get('laravel-salesforce::password') . $configExternal->get('laravel-salesforce::token'));
 			return $this;
 		} catch (Exception $e) {
 			Log::error($e->getMessage());
