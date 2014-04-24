@@ -11,4 +11,10 @@ return array(
     'username'    => '',
 	'password' => '',
 	'token' => '',
+    'wsdl' => 'enterprise.wsdl.xml',
+
+//    'username'    => '',
+//    'password' => '',
+//    'token' => '',
+//    'wsdl' => 'enterprise.sandbox.wsdl.xml',
 );

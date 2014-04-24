@@ -10,7 +10,7 @@ class Salesforce {
 	{	
 		try {
 			$this->sfh = new Client();
-			$this->sfh->createConnection(__DIR__.'/Wsdl/enterprise.wsdl.xml');
+			$this->sfh->createConnection(__DIR__.'/Wsdl/' . $configExternal->get('laravel-salesforce::wsdl'));
 			$this->sfh->login($configExternal->get('laravel-salesforce::username') , $configExternal->get('laravel-salesforce::password') . $configExternal->get('laravel-salesforce::token'));
 			return $this;
 		} catch (Exception $e) {
