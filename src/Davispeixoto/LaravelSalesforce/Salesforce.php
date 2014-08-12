@@ -2,7 +2,6 @@
 
 use Davispeixoto\ForceDotComToolkitForPhp\SforceEnterpriseClient as Client;
 use Illuminate\Config\Repository;
-use Illuminate\Filesystem\Filesystem as File;
 
 class Salesforce {
 	public $sfh;
@@ -13,24 +12,18 @@ class Salesforce {
 			$this->sfh = new Client();
 
             $wsdl = $configExternal->get('laravel-salesforce::wsdl');
-            $filePointer = new File();
 
-            if (!empty($wsdl) && $filePointer->exists($wsdl)) {
-                $this->sfh->createConnection($configExternal->get('laravel-salesforce::wsdl'));
-            } else {
-                $this->sfh->createConnection(__DIR__.'/Wsdl/enterprise.wsdl.xml');
+            if (empty($wsdl)) {
+                $wsdl = __DIR__.'/Wsdl/enterprise.wsdl.xml';
             }
 
-            $endpoint = $configExternal->get('laravel-salesforce::endpoint');
-            if (!empty($endpoint)) {
-                $this->sfh->setEndpoint($endpoint);
-            }
+			$this->sfh->createConnection($wsdl);
 
 			$this->sfh->login($configExternal->get('laravel-salesforce::username') , $configExternal->get('laravel-salesforce::password') . $configExternal->get('laravel-salesforce::token'));
 			return $this;
-		} catch (\Exception $e) {
+		} catch (Exception $e) {
 			Log::error($e->getMessage());
-			throw new \Exception('Exception in Construtor' . $e->getMessage() . PHP_EOL . $e->getTraceAsString());
+			throw new Exception('Exception no Construtor' . $e->getMessage() . "\n\n" . $e->getTraceAsString());
 		}
 	}
 	
@@ -42,14 +35,14 @@ class Salesforce {
 		return $this->sfh->create($sObjects, $type);
 	}
 	
-	public function update($sObjects, $type, $assignmentHeader = NULL, $mruHeader = NULL)
+	public function update($sObjects, $type, $assignment_header = NULL, $mru_header = NULL)
 	{
-		return $this->sfh->update($sObjects, $type, $assignmentHeader, $mruHeader);
+		return $this->sfh->update($sObjects, $type, $assignment_header, $mru_header);
 	}
 	
-	public function upsert($extId, $sObjects, $type = 'Contact')
+	public function upsert($ext_Id, $sObjects, $type = 'Contact')
 	{
-		return $this->sfh->upsert($extId, $sObjects, $type);
+		return $this->sfh->upsert($ext_Id, $sObjects, $type);
 	}
 	
 	public function merge($mergeRequest, $type)
@@ -70,9 +63,9 @@ class Salesforce {
 		return $this->sfh->printDebugInfo();
 	}
 	
-	public function createConnection($wsdl, $proxy = NULL, $soapOptions = array())
+	public function createConnection($wsdl, $proxy = NULL, $soap_options = array())
 	{
-		return $this->sfh->createConnection($wsdl, $proxy, $soapOptions);
+		return $this->sfh->createConnection($wsdl, $proxy, $soap_options);
 	}
 	
 	public function setCallOptions($header)
@@ -120,9 +113,9 @@ class Salesforce {
 		return $this->sfh->setMruHeader($header);
 	}
 	
-	public function setSessionHeader($sessionId)
+	public function setSessionHeader($id)
 	{
-		return $this->sfh->setSessionHeader($sessionId);
+		return $this->sfh->setSessionHeader($id);
 	}
 	
 	public function setUserTerritoryDeleteHeader($header)
@@ -331,7 +324,7 @@ class Salesforce {
 	public function dump()
 	{
 		$str = print_r($this , true);
-		return $str;
+		//$str .= print_r($this->sfh , true);
 	}
 }
 ?>

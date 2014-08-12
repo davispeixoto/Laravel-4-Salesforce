@@ -13,14 +13,12 @@ return array(
     'username'    => '',
 	'password' => '',
 	'token' => '',
-    'endpoint' => null,
-    'wsdl' => null,
+    'wsdl' => app_path() . '/wsdl/enterprise.wsdl.xml',
 
 
 //    sandbox
 //    'username'    => '',
 //    'password' => '',
 //    'token' => '',
-//    'endpoint' => 'https://test.salesforce.com/services/Soap/c/27.0',
-//    'wsdl' => null,
+//    'wsdl' => app_path() . '/wsdl/enterprise.sandbox.wsdl.xml',
 );
