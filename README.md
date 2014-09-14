@@ -9,7 +9,7 @@ Installation
 Begin by installing this package through Composer. Edit your project's `composer.json` file to require `davispeixoto/laravel-salesforce`.
 
     "require": {
-        "laravel/framework": "4.2.*",
+        "laravel/framework": "5.0.*@dev",
         "davispeixoto/laravel-salesforce": "2.0.0"
     }
 

@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "illuminate/support": "4.*",
+        "illuminate/support": "5.0*@dev",
         "davispeixoto/force-dot-com-toolkit-for-php": "1.0.3"
     },
     "autoload": {
