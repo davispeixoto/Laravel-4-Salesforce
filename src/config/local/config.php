@@ -9,9 +9,9 @@ return array(
     |
     */
 
-    // production
+//    sandbox
     'username'    => '',
-	'password' => '',
-	'token' => '',
-    'wsdl' => app_path() . '/wsdl/enterprise.wsdl.xml',
+    'password' => '',
+    'token' => '',
+    'wsdl' => app_path() . '/wsdl/enterprise.sandbox.wsdl.xml',
 );

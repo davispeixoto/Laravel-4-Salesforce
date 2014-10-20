@@ -12,7 +12,7 @@
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": "4.*",
-        "davispeixoto/force-dot-com-toolkit-for-php": "1.0.3"
+        "davispeixoto/force-dot-com-toolkit-for-php": "1.0.*"
     },
     "autoload": {
         "psr-0": {
