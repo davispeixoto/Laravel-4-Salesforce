@@ -10,7 +10,7 @@ Begin by installing this package through Composer. Edit your project's `composer
 
     "require": {
         "laravel/framework": "4.*",
-        "davispeixoto/laravel-salesforce": "1.0.*"
+        "davispeixoto/laravel-salesforce": "2.0.*"
     }
 
 Next, update Composer from the Terminal:
