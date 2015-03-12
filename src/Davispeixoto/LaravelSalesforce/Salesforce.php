@@ -2,6 +2,7 @@
 
 use Davispeixoto\ForceDotComToolkitForPhp\SforceEnterpriseClient as Client;
 use Illuminate\Config\Repository;
+use \Log;
 
 /**
  * Class Salesforce
