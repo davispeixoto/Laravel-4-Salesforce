@@ -55,3 +55,18 @@ This Salesforce Force.com Toolkit for PHP port is open-sourced software licensed
 ### Versioning
 
 This project follows the [Semantic Versioning](http://semver.org/)
+
+## Thanks
+
+An amazing "Thank you, guys!" for [Jetbrains](https://www.jetbrains.com/) folks, 
+who kindly empower this project with a free open-source license for [PhpStorm](https://www.jetbrains.com/phpstorm/) which can bring a whole new level of joy for coding.
+
+[![Jetbrains][2]][1]
+
+[![PhpStorm][4]][3]
+
+  [1]: https://www.jetbrains.com/
+  [2]: https://www.jetbrains.com/company/docs/logo_jetbrains.png
+  [3]: https://www.jetbrains.com/phpstorm/
+  [4]: https://www.jetbrains.com/phpstorm/documentation/docs/logo_phpstorm.png
+
