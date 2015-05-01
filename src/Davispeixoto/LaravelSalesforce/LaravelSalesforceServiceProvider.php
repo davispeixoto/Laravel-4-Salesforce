@@ -50,4 +50,3 @@ class LaravelSalesforceServiceProvider extends ServiceProvider {
 	}
 
 }
-?>

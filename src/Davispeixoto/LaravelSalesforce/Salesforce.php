@@ -17,7 +17,7 @@ class Salesforce
 {
 
     /**
-     * @var \Davispeixoto\ForceDotComToolkitForPhp\SforceBaseClient sfh The Salesforce Handler
+     * @var \Davispeixoto\ForceDotComToolkitForPhp\SforceEnterpriseClient sfh The Salesforce Handler
      */
     public $sfh;
 
@@ -45,7 +45,6 @@ class Salesforce
 
             $this->sfh->login($configExternal->get('laravel-salesforce::username'),
                 $configExternal->get('laravel-salesforce::password') . $configExternal->get('laravel-salesforce::token'));
-            return $this;
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             throw new SalesforceException('Exception no Construtor' . $e->getMessage() . "\n\n" . $e->getTraceAsString());
@@ -200,9 +199,9 @@ class Salesforce
         $this->sfh->setMruHeader($header);
     }
 
-    public function setSessionHeader($id)
+    public function setSessionHeader($sessionId)
     {
-        $this->sfh->setSessionHeader($id);
+        $this->sfh->setSessionHeader($sessionId);
     }
 
     public function setUserTerritoryDeleteHeader($header)
@@ -523,5 +522,3 @@ class Salesforce
         print_r($this, true);
     }
 }
-
-?>
