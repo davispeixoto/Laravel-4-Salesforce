@@ -48,12 +48,7 @@ class Salesforce
             $token = $configExternal->get('laravel-salesforce::token');
 
             $this->sfh->login($username, $password . $token);
-
-            $this->noParamsReturns = array('getNamespace',);
-            $this->noParamsNoReturns = array('printDebugInfo');
-            $this->paramsReturns = array();
-            $this->paramsNoReturns = array('setCallOptions');
-
+            
         } catch (Exception $e) {
             throw new SalesforceException('Exception at Constructor' . $e->getMessage() . "\n\n" . $e->getTraceAsString());
         }
