@@ -4,10 +4,11 @@ This Laravel 4 package provides an interface for using [Salesforce CRM](http://w
 
 [![Latest Stable Version](https://img.shields.io/packagist/v/davispeixoto/laravel-salesforce.svg)](https://packagist.org/packages/davispeixoto/laravel-salesforce)
 [![Total Downloads](https://img.shields.io/packagist/dt/davispeixoto/laravel-salesforce.svg)](https://packagist.org/packages/davispeixoto/laravel-salesforce)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/3b9313d5-1340-4459-9973-070e19c289bc/small.png)](https://insight.sensiolabs.com/projects/3b9313d5-1340-4459-9973-070e19c289bc)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/davispeixoto/Laravel-4-Salesforce/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/davispeixoto/Laravel-4-Salesforce/?branch=master)
 [![Codacy Badge](https://www.codacy.com/project/badge/a0e8c76d048d441194d4cfb03642bd0c)](https://www.codacy.com/app/davis-peixoto/Laravel-4-Salesforce)
+[![Code Climate](https://codeclimate.com/github/davispeixoto/Laravel-4-Salesforce/badges/gpa.svg)](https://codeclimate.com/github/davispeixoto/Laravel-4-Salesforce)
 [![Build Status](https://travis-ci.org/davispeixoto/Laravel-4-Salesforce.svg?branch=2.0.5)](https://travis-ci.org/davispeixoto/Laravel-4-Salesforce)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/3b9313d5-1340-4459-9973-070e19c289bc/small.png)](https://insight.sensiolabs.com/projects/3b9313d5-1340-4459-9973-070e19c289bc)
 
 ## Installation
 
