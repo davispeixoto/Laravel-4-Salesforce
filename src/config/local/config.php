@@ -10,7 +10,7 @@ return array(
     */
 
 //    sandbox
-    'username'    => '',
+    'username' => '',
     'password' => '',
     'token' => '',
     'wsdl' => app_path() . '/wsdl/enterprise.sandbox.wsdl.xml',
