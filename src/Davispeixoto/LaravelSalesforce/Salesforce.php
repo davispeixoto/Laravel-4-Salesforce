@@ -2,7 +2,6 @@
 
 use Davispeixoto\ForceDotComToolkitForPhp\SforceEnterpriseClient as Client;
 use Illuminate\Config\Repository;
-use \Log;
 
 /**
  * Class Salesforce
@@ -46,7 +45,6 @@ class Salesforce
             $this->sfh->login($configExternal->get('laravel-salesforce::username'),
                 $configExternal->get('laravel-salesforce::password') . $configExternal->get('laravel-salesforce::token'));
         } catch (\Exception $e) {
-            Log::error($e->getMessage());
             throw new SalesforceException('Exception no Construtor' . $e->getMessage() . "\n\n" . $e->getTraceAsString());
         }
     }
@@ -107,7 +105,7 @@ class Salesforce
      *
      * Merges up to 3 records into one.
      *
-     * @param \stdClass $mergeRequest A mergeRequest object
+     * @param stdClass $mergeRequest A mergeRequest object
      * @param string $type The Salesforce Object Type (actually can merge only Lead, Account and Contact objects)
      * @return \Davispeixoto\ForceDotComToolkitForPhp\MergeResult
      */
