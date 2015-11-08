@@ -1,6 +1,8 @@
 <?php namespace Davispeixoto\LaravelSalesforce;
 
-class SalesforceException extends \Exception
+use Exception;
+
+class SalesforceException extends Exception
 {
 
 }
