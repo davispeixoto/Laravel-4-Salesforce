@@ -1,7 +1,7 @@
 <?php namespace Davispeixoto\LaravelSalesforce;
 
 use Davispeixoto\ForceDotComToolkitForPhp\SforceEnterpriseClient as Client;
-use Exception;
+use SalesforceException;
 use Illuminate\Config\Repository;
 
 /**
@@ -17,9 +17,9 @@ class Salesforce
 {
 
     /**
-     * @var \Davispeixoto\ForceDotComToolkitForPhp\SforceEnterpriseClient sfh The Salesforce Handler
+     * @var Client $sfh The Salesforce Handler
      */
-    public $sfh;
+    private $sfh;
 
     /**
      * The constructor.
