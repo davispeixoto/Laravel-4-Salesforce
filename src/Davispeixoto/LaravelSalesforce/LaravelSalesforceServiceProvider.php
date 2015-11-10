@@ -3,7 +3,6 @@
 namespace Davispeixoto\LaravelSalesforce;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Foundation\AliasLoader as Loader;
 
 class LaravelSalesforceServiceProvider extends ServiceProvider
 {
@@ -33,7 +32,7 @@ class LaravelSalesforceServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->booting(function () {
-            $loader = Loader::getInstance();
+            $loader = \Illumintate\Foundation\AliasLoader::getInstance();
             $loader->alias('Salesforce', 'Davispeixoto\LaravelSalesforce\Facades\Salesforce');
             $loader->alias('SF', 'Davispeixoto\LaravelSalesforce\Facades\Salesforce');
         });
