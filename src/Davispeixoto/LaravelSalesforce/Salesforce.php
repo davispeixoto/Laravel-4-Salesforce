@@ -2,6 +2,7 @@
 
 use Davispeixoto\ForceDotComToolkitForPhp\SforceEnterpriseClient as Client;
 use Exception;
+use Davispeixoto\LaravelSalesforce\Exceptions\SalesforceException;
 use Illuminate\Config\Repository;
 
 /**
@@ -19,7 +20,7 @@ class Salesforce
     /**
      * @var \Davispeixoto\ForceDotComToolkitForPhp\SforceEnterpriseClient sfh The Salesforce Handler
      */
-    public $sfh;
+    private $sfh;
 
     /**
      * The constructor.
@@ -37,7 +38,7 @@ class Salesforce
 
             $wsdl = $configExternal->get('laravel-salesforce::wsdl');
 
-            if (empty($wsdl)) {
+            if (null !== $wsdl && file_exists($wsdl)) {
                 $wsdl = __DIR__ . '/Wsdl/enterprise.wsdl.xml';
             }
 
@@ -57,17 +58,5 @@ class Salesforce
     public function __call($method, $args)
     {
         return call_user_func_array(array($this->sfh, $method), $args);
-    }
-
-    /*
-     * Debugging functions
-     */
-
-    /**
-     * @return mixed
-     */
-    public function dump()
-    {
-        return print_r($this, true);
     }
 }

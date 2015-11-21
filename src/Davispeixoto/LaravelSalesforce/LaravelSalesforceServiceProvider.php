@@ -10,7 +10,7 @@ class LaravelSalesforceServiceProvider extends ServiceProvider
      *
      * @var bool
      */
-    protected $defer = false;
+    protected $defer = true;
 
     /**
      * Bootstrap the application events.
@@ -32,11 +32,10 @@ class LaravelSalesforceServiceProvider extends ServiceProvider
         $this->app->booting(function () {
             $loader = \Illuminate\Foundation\AliasLoader::getInstance();
             $loader->alias('Salesforce', 'Davispeixoto\LaravelSalesforce\Facades\Salesforce');
-            $loader->alias('SF', 'Davispeixoto\LaravelSalesforce\Facades\Salesforce');
         });
 
         $this->app['salesforce'] = $this->app->share(function ($app) {
-            return new Salesforce($app['config']);
+            return new Salesforce($app['config'] , $app['']);
         });
     }
 

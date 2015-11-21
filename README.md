@@ -17,7 +17,7 @@ Begin by installing this package through Composer. Edit your project's `composer
 ```json
     "require": {
         "laravel/framework": "4.*",
-        "davispeixoto/laravel-salesforce": "2.0.*"
+        "davispeixoto/laravel-salesforce": "3.0.*"
     }
 ```
 
