@@ -2,6 +2,7 @@
 
 use Davispeixoto\ForceDotComToolkitForPhp\SforceEnterpriseClient as Client;
 use SalesforceException;
+use Exception;
 use Illuminate\Config\Repository;
 
 /**
