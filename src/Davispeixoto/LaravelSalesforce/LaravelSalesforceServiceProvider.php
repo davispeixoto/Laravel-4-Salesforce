@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 
 class LaravelSalesforceServiceProvider extends ServiceProvider
 {
-
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -31,11 +30,6 @@ class LaravelSalesforceServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->booting(function () {
-            $loader = \Illumintate\Foundation\AliasLoader::getInstance();
-            $loader->alias('Salesforce', 'Davispeixoto\LaravelSalesforce\Facades\Salesforce');
-        });
-
         $this->app['salesforce'] = $this->app->share(function ($app) {
             return new Salesforce($app['config']);
         });
