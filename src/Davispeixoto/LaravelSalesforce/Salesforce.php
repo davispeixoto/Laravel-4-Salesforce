@@ -1,7 +1,6 @@
 <?php namespace Davispeixoto\LaravelSalesforce;
 
 use Davispeixoto\ForceDotComToolkitForPhp\SforceEnterpriseClient as Client;
-use SalesforceException;
 use Exception;
 use Illuminate\Config\Repository;
 
@@ -49,7 +48,7 @@ class Salesforce
             $token = $configExternal->get('laravel-salesforce::token');
 
             $this->sfh->login($username, $password . $token);
-            
+
         } catch (Exception $e) {
             throw new SalesforceException('Exception at Constructor' . $e->getMessage() . "\n\n" . $e->getTraceAsString());
         }
