@@ -2,7 +2,6 @@
 
 use Davispeixoto\ForceDotComToolkitForPhp\SforceEnterpriseClient as Client;
 use Exception;
-use Illuminate\Config\Repository;
 
 /**
  * Class Salesforce
@@ -15,48 +14,57 @@ use Illuminate\Config\Repository;
  */
 class Salesforce
 {
-
     /**
      * @var Client $sfh The Salesforce Handler
      */
-    private $sfh;
+    public $sfh;
 
     /**
-     * The constructor.
+     * Salesforce constructor.
      *
-     * Authenticates into Salesforce according to
-     * the provided credentials and WSDL file
-     *
-     * @param Repository $configExternal
+     * @param Client $sfh
      * @throws SalesforceException
      */
-    public function __construct(Repository $configExternal)
+    public function __construct(Client $sfh)
     {
-        try {
-            $this->sfh = new Client();
-
-            $wsdl = $configExternal->get('laravel-salesforce::wsdl');
-
-            if (empty($wsdl)) {
-                $wsdl = __DIR__ . '/Wsdl/enterprise.wsdl.xml';
-            }
-
-            $this->sfh->createConnection($wsdl);
-
-            $username = $configExternal->get('laravel-salesforce::username');
-            $password = $configExternal->get('laravel-salesforce::password');
-            $token = $configExternal->get('laravel-salesforce::token');
-
-            $this->sfh->login($username, $password . $token);
-
-        } catch (Exception $e) {
-            throw new SalesforceException('Exception at Constructor' . $e->getMessage() . "\n\n" . $e->getTraceAsString());
-        }
+        $this->sfh = $sfh;
     }
 
+    /**
+     * @param $method
+     * @param $args
+     * @return mixed
+     */
     public function __call($method, $args)
     {
         return call_user_func_array(array($this->sfh, $method), $args);
+    }
+
+    /**
+     * Authenticates into Salesforce according to
+     * the provided credentials and WSDL file
+     *
+     * @param $configExternal
+     * @throws SalesforceException
+     */
+    public function connect($configExternal)
+    {
+        $wsdl = $configExternal->get('salesforce.wsdl');
+
+        if (empty($wsdl)) {
+            $wsdl = __DIR__ . '/Wsdl/enterprise.wsdl.xml';
+        }
+
+        $user = $configExternal->get('salesforce.username');
+        $pass = $configExternal->get('salesforce.password');
+        $token = $configExternal->get('salesforce.token');
+
+        try {
+            $this->sfh->createConnection($wsdl);
+            $this->sfh->login($user, $pass . $token);
+        } catch (Exception $e) {
+            throw new SalesforceException('Exception at Constructor' . $e->getMessage() . "\n\n" . $e->getTraceAsString());
+        }
     }
 
     /*
