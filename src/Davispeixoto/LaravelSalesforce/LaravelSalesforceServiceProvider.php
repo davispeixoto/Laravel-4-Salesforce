@@ -1,9 +1,13 @@
-<?php 
-
+<?php
 namespace Davispeixoto\LaravelSalesforce;
 
 use Illuminate\Support\ServiceProvider;
+use Davispeixoto\ForceDotComToolkitForPhp\SforceEnterpriseClient as Client;
 
+/**
+ * Class LaravelSalesforceServiceProvider
+ * @package Davispeixoto\LaravelSalesforce
+ */
 class LaravelSalesforceServiceProvider extends ServiceProvider
 {
     /**
@@ -30,8 +34,11 @@ class LaravelSalesforceServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app['salesforce'] = $this->app->share(function ($app) {
-            return new Salesforce($app['config']);
+        $this->app['salesforce'] = $this->app->singleton('salesforce', function ($app) {
+            $sf = new Salesforce(new Client());
+            $sf->connect($app['config']);
+
+            return $sf;
         });
     }
 
