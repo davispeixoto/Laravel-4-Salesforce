@@ -34,7 +34,7 @@ class LaravelSalesforceServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app['salesforce'] = $this->app->singleton('salesforce', function ($app) {
+        $this->app->singleton('salesforce', function ($app) {
             $sf = new Salesforce(new Client());
             $sf->connect($app['config']);
 
