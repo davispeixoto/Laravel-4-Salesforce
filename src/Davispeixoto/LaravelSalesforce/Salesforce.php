@@ -47,21 +47,22 @@ class Salesforce
      * @param $configExternal
      * @throws SalesforceException
      */
+
     public function connect($configExternal)
     {
-        $wsdl = $configExternal->get('salesforce.wsdl');
+        $wsdl = $configExternal->get('laravel-salesforce::wsdl');
 
         if (empty($wsdl)) {
             $wsdl = __DIR__ . '/Wsdl/enterprise.wsdl.xml';
         }
 
-        $user = $configExternal->get('salesforce.username');
-        $pass = $configExternal->get('salesforce.password');
-        $token = $configExternal->get('salesforce.token');
+        $username = $configExternal->get('laravel-salesforce::username');
+        $password = $configExternal->get('laravel-salesforce::password');
+        $token = $configExternal->get('laravel-salesforce::token');
 
         try {
             $this->sfh->createConnection($wsdl);
-            $this->sfh->login($user, $pass . $token);
+            $this->sfh->login($username, $password . $token);
         } catch (Exception $e) {
             throw new SalesforceException('Exception at Constructor' . $e->getMessage() . "\n\n" . $e->getTraceAsString());
         }
